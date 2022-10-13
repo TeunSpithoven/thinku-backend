@@ -7,10 +7,6 @@ download the project files or clone this repository
 ```
 git clone https://github.com/TeunSpithoven/thinku-backend.git
 ```
-go into the project folder
-```
-cd ./thinku-backend
-```
 install dependencies
 ```
 npm install
