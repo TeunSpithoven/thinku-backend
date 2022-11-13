@@ -1,4 +1,6 @@
 # thinku-backend
+status: https://docs.nestjs.com/techniques/database at typeorm integration
+
 backend application for the thinku quiz application providing rest and realtime functionalities
 front-end: https://github.com/TeunSpithoven/thinku-frontend
 
@@ -15,3 +17,6 @@ run the development server
 ```
 npm run start:dev
 ```
+
+##Production
+disable the synchronize option in the TypeOrm configuration in app.module.ts 
