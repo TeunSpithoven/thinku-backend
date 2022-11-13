@@ -9,7 +9,7 @@ import {
 } from 'class-validator';
 export class CreateQuizDto {
   @IsNumber()
-  public UserId: number;
+  public userId: number;
 
   @IsString()
   public title: string;
