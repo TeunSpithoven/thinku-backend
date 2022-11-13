@@ -6,6 +6,8 @@ import { QuizzesModule } from './quizzes/quizzes.module';
 import { Quiz } from './quizzes/entities/quiz.entity';
 import { Question } from './quizzes/entities/question.entity';
 import { Answer } from './quizzes/entities/answer.entity';
+import { QuestionsModule } from './questions/questions.module';
+import { AnswersModule } from './answers/answers.module';
 
 @Module({
   imports: [
@@ -20,6 +22,8 @@ import { Answer } from './quizzes/entities/answer.entity';
       entities: [Quiz, Question, Answer],
       synchronize: true,
     }),
+    QuestionsModule,
+    AnswersModule,
   ],
   controllers: [AppController],
   providers: [AppService],

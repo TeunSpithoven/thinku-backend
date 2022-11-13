@@ -18,8 +18,13 @@ export class QuizzesService {
     private answersRepository: Repository<Answer>,
   ) {}
 
-  create(createQuizDto: CreateQuizDto) {
-    return 'This action adds a new quiz';
+  create(createQuizDto: CreateQuizDto): Promise<Quiz> {
+    this.questionsRepository.save(createQuizDto.questions);
+    let i = 0;
+    for (i; i < createQuizDto.questions.length; i++) {
+      this.answersRepository.save(createQuizDto.questions[i].answers);
+    }
+    return this.quizzesRepository.save(createQuizDto);
   }
 
   findAll(): Promise<Quiz[]> {

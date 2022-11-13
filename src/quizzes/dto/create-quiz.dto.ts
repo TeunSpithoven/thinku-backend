@@ -7,6 +7,8 @@ import {
   //   IsOptional,
   IsString,
 } from 'class-validator';
+import { Question } from '../entities/question.entity';
+
 export class CreateQuizDto {
   @IsNumber()
   public userId: number;
@@ -22,5 +24,5 @@ export class CreateQuizDto {
 
   @IsArray()
   @ArrayMinSize(1)
-  public questions: string[];
+  public questions: Question[];
 }
