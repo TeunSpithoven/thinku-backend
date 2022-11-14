@@ -17,7 +17,6 @@ export class AnswersService {
     const answer = new Answer();
     answer.answer = createAnswerDto.answer;
     answer.isCorrect = createAnswerDto.isCorrect;
-    console.log(`creating answer: ${answer.answer}, ${answer.isCorrect}`);
     const returnAnswer = await this.answersRepository.save(answer);
     console.log(`returnAnswer: ${returnAnswer}`);
     return returnAnswer;

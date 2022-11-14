@@ -13,7 +13,9 @@ export class Question {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @ManyToOne(() => Quiz, (quiz) => quiz.questions)
+  @ManyToOne(() => Quiz, (quiz) => quiz.questions, {
+    onDelete: 'CASCADE',
+  })
   quiz: Quiz;
 
   @Column()
