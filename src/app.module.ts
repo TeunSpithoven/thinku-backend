@@ -11,7 +11,6 @@ import { AnswersModule } from './answers/answers.module';
 
 @Module({
   imports: [
-    QuizzesModule,
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: 'localhost',
@@ -22,6 +21,7 @@ import { AnswersModule } from './answers/answers.module';
       entities: [Quiz, Question, Answer],
       synchronize: true,
     }),
+    QuizzesModule,
     QuestionsModule,
     AnswersModule,
   ],

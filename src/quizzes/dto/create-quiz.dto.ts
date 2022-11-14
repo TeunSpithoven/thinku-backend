@@ -7,7 +7,8 @@ import {
   //   IsOptional,
   IsString,
 } from 'class-validator';
-import { Question } from '../entities/question.entity';
+// import { CreateQuestionDto } from '../../questions/dto/create-question.dto';
+import { Question } from '../../questions/entities/question.entity';
 
 export class CreateQuizDto {
   @IsNumber()
