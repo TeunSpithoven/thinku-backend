@@ -40,7 +40,7 @@ export class QuizzesService {
   findOne(id: number): Promise<Quiz> {
     return this.quizzesRepository.findOne({
       where: { id: id },
-      relations: { questions: true },
+      relations: { questions: { answers: true } },
     });
   }
 
