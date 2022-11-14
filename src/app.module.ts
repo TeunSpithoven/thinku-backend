@@ -4,8 +4,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { QuizzesModule } from './quizzes/quizzes.module';
 import { Quiz } from './quizzes/entities/quiz.entity';
-import { Question } from './quizzes/entities/question.entity';
-import { Answer } from './quizzes/entities/answer.entity';
+import { Question } from './questions/entities/question.entity';
+import { Answer } from './answers/entities/answer.entity';
 import { QuestionsModule } from './questions/questions.module';
 import { AnswersModule } from './answers/answers.module';
 

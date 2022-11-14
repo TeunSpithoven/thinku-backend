@@ -13,19 +13,22 @@ export class AnswersService {
     private answersRepository: Repository<Answer>,
   ) {}
 
-  create(
-    createAnswerDto: CreateAnswerDto,
-    question: Question,
-  ): Promise<Answer> {
+  async create(createAnswerDto: CreateAnswerDto): Promise<Answer> {
     const answer = new Answer();
     answer.answer = createAnswerDto.answer;
     answer.isCorrect = createAnswerDto.isCorrect;
-    answer.question = question;
-    return this.answersRepository.save(answer);
+    console.log(`creating answer: ${answer.answer}, ${answer.isCorrect}`);
+    const returnAnswer = await this.answersRepository.save(answer);
+    console.log(`returnAnswer: ${returnAnswer}`);
+    return returnAnswer;
   }
 
   findAll(): Promise<Answer[]> {
     return this.answersRepository.find();
+  }
+
+  findAllById(question: Question): Promise<Answer[]> {
+    return this.answersRepository.find({ where: { question: question } });
   }
 
   findOne(id: number): Promise<Answer> {

@@ -1,5 +1,5 @@
 import { Entity, Column, PrimaryGeneratedColumn, OneToMany } from 'typeorm';
-import { Question } from './question.entity';
+import { Question } from '../../questions/entities/question.entity';
 
 @Entity()
 export class Quiz {
@@ -18,7 +18,6 @@ export class Quiz {
   @Column()
   image: string;
 
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  @OneToMany((type) => Question, (question) => question.quiz)
+  @OneToMany(() => Question, (question) => question.quiz)
   questions: Question[];
 }
