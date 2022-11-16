@@ -44,11 +44,16 @@ export class QuizzesService {
     });
   }
 
-  update(id: number, updateQuizDto: UpdateQuizDto) {
-    return `This action updates a #${id} quiz`;
+  update(id: number, updateQuizDto: UpdateQuizDto): Promise<Quiz> {
+    this.quizzesRepository.update(id, updateQuizDto);
+    return this.findOne(id);
   }
 
   remove(id: number) {
     return this.quizzesRepository.delete(id);
+  }
+
+  async setImage(id: number, imageUrl: string) {
+    this.update(id, {image: imageUrl});
   }
 }

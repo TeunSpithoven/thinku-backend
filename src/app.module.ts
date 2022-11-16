@@ -8,6 +8,7 @@ import { Question } from './questions/entities/question.entity';
 import { Answer } from './answers/entities/answer.entity';
 import { QuestionsModule } from './questions/questions.module';
 import { AnswersModule } from './answers/answers.module';
+import { ImagesModule } from './images/images.module';
 
 @Module({
   imports: [
@@ -24,6 +25,7 @@ import { AnswersModule } from './answers/answers.module';
     QuizzesModule,
     QuestionsModule,
     AnswersModule,
+    ImagesModule,
   ],
   controllers: [AppController],
   providers: [AppService],

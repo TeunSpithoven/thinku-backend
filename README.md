@@ -1,5 +1,6 @@
 # thinku-backend
-status: https://docs.nestjs.com/techniques/database at typeorm integration
+status: https://www.techiediaries.com/nestjs-upload-serve-static-file/ 
+bij Next, add the following method mapped to the auth/:userid/avatar endpoint:
 
 backend application for the thinku quiz application providing rest and realtime functionalities
 front-end: https://github.com/TeunSpithoven/thinku-frontend
