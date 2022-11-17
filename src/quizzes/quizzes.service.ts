@@ -50,15 +50,13 @@ export class QuizzesService {
     quiz.title = updateQuizDto.title;
     quiz.description = updateQuizDto.description;
     quiz.image = updateQuizDto.image;
-    const questionList: Question[] = [];
     let i = 0;
     for (i; i < updateQuizDto.questions.length; i++) {
       const q = updateQuizDto.questions[i];
-      const newQuestion = await this.questionService.update(q.id, q);
-      questionList.push(newQuestion);
+      await this.questionService.update(q.id, q);
     }
-    quiz.questions = questionList;
-    this.quizzesRepository.update(id, updateQuizDto);
+    const returnQuiz = await this.quizzesRepository.update(id, quiz);
+    console.log(returnQuiz);
     return this.findOne(id);
   }
 

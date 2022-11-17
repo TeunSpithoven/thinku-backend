@@ -50,15 +50,12 @@ export class QuestionsService {
     question.type = updateQuestionDto.type;
     question.time = updateQuestionDto.time;
     question.number = updateQuestionDto.number;
-    const answerList: Answer[] = [];
     for (let i = 0; i < updateQuestionDto.answers.length; i++) {
       const answer = updateQuestionDto.answers[i];
-      const newAnswer = await this.answersService.update(answer.id, answer);
-      answerList.push(newAnswer);
+      await this.answersService.update(answer.id, answer);
     }
-    console.log(`answers: ${answerList}`);
-    question.answers = answerList;
-    this.questionsRepository.save(question);
+    const returnQuestion = await this.questionsRepository.update(id, question);
+    console.log(returnQuestion);
     return this.findOne(id);
   }
 

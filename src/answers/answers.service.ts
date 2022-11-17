@@ -39,7 +39,7 @@ export class AnswersService {
     answer.answer = updateAnswerDto.answer;
     answer.isCorrect = updateAnswerDto.isCorrect;
     const returnAnswer = await this.answersRepository.update(id, answer);
-    console.log(`returnAnswer: ${returnAnswer}`);
+    console.log(returnAnswer);
     return this.findOne(id);
   }
 
