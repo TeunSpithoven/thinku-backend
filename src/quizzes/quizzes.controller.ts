@@ -7,9 +7,9 @@ import {
   Param,
   Delete,
   UseInterceptors,
-  FileInterceptor,
   UploadedFile,
 } from '@nestjs/common';
+import { FileInterceptor } from '@nestjs/platform-express';
 import { diskStorage } from 'multer';
 import { extname } from 'path';
 import { QuizzesService } from './quizzes.service';
