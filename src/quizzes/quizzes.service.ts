@@ -55,6 +55,12 @@ export class QuizzesService {
       const q = updateQuizDto.questions[i];
       await this.questionService.update(q.id, q);
     }
+    // if the submitted quiz hasn't been changed, dont update it
+    // const currentQuiz = await this.findOne(id);
+    // if (currentQuiz === quiz) {
+    //   return currentQuiz;
+    // }
+    // update the quiz
     const returnQuiz = await this.quizzesRepository.update(id, quiz);
     console.log(returnQuiz);
     return this.findOne(id);

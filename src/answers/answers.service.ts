@@ -38,6 +38,12 @@ export class AnswersService {
     const answer = new Answer();
     answer.answer = updateAnswerDto.answer;
     answer.isCorrect = updateAnswerDto.isCorrect;
+    // if the submitted answer hasn't been changed, don't update it
+    // const currentAnswer = await this.findOne(id);
+    // if (currentAnswer === answer) {
+    //   return currentAnswer;
+    // }
+    // update the answer
     const returnAnswer = await this.answersRepository.update(id, answer);
     console.log(returnAnswer);
     return this.findOne(id);
