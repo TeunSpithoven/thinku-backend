@@ -34,8 +34,13 @@ export class AnswersService {
     return this.answersRepository.findOne({ where: { id: id } });
   }
 
-  update(id: number, updateAnswerDto: UpdateAnswerDto) {
-    return `This action updates a #${id} answer`;
+  async update(id: number, updateAnswerDto: UpdateAnswerDto): Promise<Answer> {
+    const answer = new Answer();
+    answer.answer = updateAnswerDto.answer;
+    answer.isCorrect = updateAnswerDto.isCorrect;
+    const returnAnswer = await this.answersRepository.update(id, answer);
+    console.log(`returnAnswer: ${returnAnswer}`);
+    return this.findOne(id);
   }
 
   remove(id: number) {

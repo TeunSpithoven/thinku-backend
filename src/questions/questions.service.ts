@@ -41,8 +41,25 @@ export class QuestionsService {
     return this.questionsRepository.findOne({ where: { id: id } });
   }
 
-  update(id: number, updateQuestionDto: UpdateQuestionDto) {
-    return `This action updates a #${id} question`;
+  async update(
+    id: number,
+    updateQuestionDto: UpdateQuestionDto,
+  ): Promise<Question> {
+    const question = new Question();
+    question.question = updateQuestionDto.question;
+    question.type = updateQuestionDto.type;
+    question.time = updateQuestionDto.time;
+    question.number = updateQuestionDto.number;
+    const answerList: Answer[] = [];
+    for (let i = 0; i < updateQuestionDto.answers.length; i++) {
+      const answer = updateQuestionDto.answers[i];
+      const newAnswer = await this.answersService.update(answer.id, answer);
+      answerList.push(newAnswer);
+    }
+    console.log(`answers: ${answerList}`);
+    question.answers = answerList;
+    this.questionsRepository.save(question);
+    return this.findOne(id);
   }
 
   remove(id: number) {

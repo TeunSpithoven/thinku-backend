@@ -8,7 +8,7 @@ import {
   IsString,
 } from 'class-validator';
 // import { CreateQuizDto } from '../../quizzes/dto/create-quiz.dto';
-import { CreateAnswerDto } from '../../answers/dto/create-answer.dto';
+import { Answer } from '../../answers/entities/answer.entity';
 
 export class CreateQuestionDto {
   @IsString()
@@ -25,5 +25,5 @@ export class CreateQuestionDto {
 
   @IsArray()
   @ArrayMinSize(1)
-  public answers: CreateAnswerDto[];
+  public answers: Answer[];
 }

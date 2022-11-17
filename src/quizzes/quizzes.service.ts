@@ -44,7 +44,20 @@ export class QuizzesService {
     });
   }
 
-  update(id: number, updateQuizDto: UpdateQuizDto): Promise<Quiz> {
+  async update(id: number, updateQuizDto: UpdateQuizDto): Promise<Quiz> {
+    const quiz = new Quiz();
+    quiz.userId = updateQuizDto.userId;
+    quiz.title = updateQuizDto.title;
+    quiz.description = updateQuizDto.description;
+    quiz.image = updateQuizDto.image;
+    const questionList: Question[] = [];
+    let i = 0;
+    for (i; i < updateQuizDto.questions.length; i++) {
+      const q = updateQuizDto.questions[i];
+      const newQuestion = await this.questionService.update(q.id, q);
+      questionList.push(newQuestion);
+    }
+    quiz.questions = questionList;
     this.quizzesRepository.update(id, updateQuizDto);
     return this.findOne(id);
   }
@@ -54,6 +67,6 @@ export class QuizzesService {
   }
 
   async setImage(id: number, imageUrl: string) {
-    this.update(id, {image: imageUrl});
+    this.update(id, { image: imageUrl });
   }
 }
