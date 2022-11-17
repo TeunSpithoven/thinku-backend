@@ -20,6 +20,7 @@ export class QuestionsService {
     const question = new Question();
     question.question = createQuestionDto.question;
     question.type = createQuestionDto.type;
+    question.time = createQuestionDto.time;
     question.number = createQuestionDto.number;
     const answerList: Answer[] = [];
     for (let i = 0; i < createQuestionDto.answers.length; i++) {

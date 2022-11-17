@@ -18,6 +18,9 @@ export class CreateQuestionDto {
   public type: string;
 
   @IsNumber()
+  public time: number;
+
+  @IsNumber()
   public number: number;
 
   @IsArray()

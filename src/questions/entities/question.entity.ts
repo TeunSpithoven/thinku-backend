@@ -25,6 +25,9 @@ export class Question {
   type: string;
 
   @Column()
+  time: number;
+
+  @Column()
   number: number;
 
   @OneToMany(() => Answer, (answer) => answer.question)
