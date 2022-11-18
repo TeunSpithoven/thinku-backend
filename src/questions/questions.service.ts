@@ -4,7 +4,6 @@ import { UpdateQuestionDto } from './dto/update-question.dto';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Question } from './entities/question.entity';
-import { Quiz } from '../quizzes/entities/quiz.entity';
 import { AnswersService } from '../answers/answers.service';
 import { Answer } from '../answers/entities/answer.entity';
 
@@ -50,16 +49,23 @@ export class QuestionsService {
     question.type = updateQuestionDto.type;
     question.time = updateQuestionDto.time;
     question.number = updateQuestionDto.number;
+    const answerList: Answer[] = [];
     for (let i = 0; i < updateQuestionDto.answers.length; i++) {
       const answer = updateQuestionDto.answers[i];
-      await this.answersService.update(answer.id, answer);
+      // if the question alrady exists, update. else create a new question
+      if (answer.id === undefined) {
+        answer.question = await this.findOne(id);
+        const newAnswer = await this.answersService.create(answer);
+        answerList.push(newAnswer);
+      } else {
+        const updatedAnswer = await this.answersService.update(
+          answer.id,
+          answer,
+        );
+        answerList.push(updatedAnswer);
+      }
     }
-    // if the submitted question hasn't been changed, dont update it
-    // const currentQuestion = await this.findOne(id);
-    // if (currentQuestion === question) {
-    //   return currentQuestion;
-    // }
-    // update the question
+    question.answers = answerList;
     const returnQuestion = await this.questionsRepository.update(id, question);
     console.log(returnQuestion);
     return this.findOne(id);

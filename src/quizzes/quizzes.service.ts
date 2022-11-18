@@ -50,17 +50,23 @@ export class QuizzesService {
     quiz.title = updateQuizDto.title;
     quiz.description = updateQuizDto.description;
     quiz.image = updateQuizDto.image;
+    const questionList: Question[] = [];
     let i = 0;
     for (i; i < updateQuizDto.questions.length; i++) {
       const q = updateQuizDto.questions[i];
-      await this.questionService.update(q.id, q);
+      // if the question alrady exists, update. else create a new question
+      if (q.id === undefined) {
+        console.log(`q.id: ${q.id}`);
+        q.quiz = await this.findOne(id);
+        console.log(q);
+        const newQuestion = await this.questionService.create(q);
+        questionList.push(newQuestion);
+      } else {
+        const updatedQuestion = await this.questionService.update(q.id, q);
+        questionList.push(updatedQuestion);
+      }
     }
-    // if the submitted quiz hasn't been changed, dont update it
-    // const currentQuiz = await this.findOne(id);
-    // if (currentQuiz === quiz) {
-    //   return currentQuiz;
-    // }
-    // update the quiz
+    quiz.questions = questionList;
     const returnQuiz = await this.quizzesRepository.update(id, quiz);
     console.log(returnQuiz);
     return this.findOne(id);
