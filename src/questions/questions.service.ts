@@ -54,7 +54,7 @@ export class QuestionsService {
       const answer = updateQuestionDto.answers[i];
       // if the question alrady exists, update. else create a new question
       if (answer.id === undefined) {
-        answer.question = await this.findOne(id);
+        // answer.question = await this.findOne(id);
         const newAnswer = await this.answersService.create(answer);
         answerList.push(newAnswer);
       } else {

@@ -57,8 +57,7 @@ export class QuizzesService {
       // if the question alrady exists, update. else create a new question
       if (q.id === undefined) {
         console.log(`q.id: ${q.id}`);
-        q.quiz = await this.findOne(id);
-        console.log(q);
+        console.log(q.type);
         const newQuestion = await this.questionService.create(q);
         questionList.push(newQuestion);
       } else {
