@@ -58,6 +58,7 @@ export class QuizzesService {
       if (q.id === undefined) {
         console.log(`q.id: ${q.id}`);
         console.log(q.type);
+        // DEBUG: hier ongeveer doe ik iets fout wat goed gaat in de questionscontroller bij de answers
         const newQuestion = await this.questionService.create(q);
         questionList.push(newQuestion);
       } else {
