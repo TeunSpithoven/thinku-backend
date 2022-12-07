@@ -35,7 +35,7 @@ jobs:
     - name: Login to Docker
       run: docker login --username=${{ secrets.DOCKER_USERNAME }} --password=${{ secrets.DOCKER_PASSWORD }}
     - name: Build Image
-      run: docker build -t ${{ secrets.DOCKER_USERNAME }}/thinku-frontend:latest .
+      run: docker build -t ${{ secrets.DOCKER_USERNAME }}/thinku-backend:latest .
     - name: Push Image To DockerHub :)
-      run: docker push ${{ secrets.DOCKER_USERNAME }}/thinku-frontend:latest
+      run: docker push ${{ secrets.DOCKER_USERNAME }}/thinku-backend:latest
 
