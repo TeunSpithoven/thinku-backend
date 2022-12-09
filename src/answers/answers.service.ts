@@ -13,13 +13,12 @@ export class AnswersService {
     private answersRepository: Repository<Answer>,
   ) {}
 
-  async create(createAnswerDto: CreateAnswerDto): Promise<Answer> {
+  create(createAnswerDto: CreateAnswerDto): Promise<Answer> {
     const answer = new Answer();
     answer.answer = createAnswerDto.answer;
     answer.isCorrect = createAnswerDto.isCorrect;
-    const returnAnswer = await this.answersRepository.save(answer);
-    console.log(`returnAnswer: ${returnAnswer}`);
-    return returnAnswer;
+    // TODO: this returns undefined!
+    return this.answersRepository.save(answer);
   }
 
   findAll(): Promise<Answer[]> {
