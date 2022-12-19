@@ -17,7 +17,9 @@ export class AnswersService {
     const answer = new Answer();
     answer.answer = createAnswerDto.answer;
     answer.isCorrect = createAnswerDto.isCorrect;
-    // TODO: this returns undefined!
+    // TODO: this returns undefined! because the repository is not defined during the test
+    const huts = this.answersRepository;
+    console.log(huts);
     return this.answersRepository.save(answer);
   }
 
