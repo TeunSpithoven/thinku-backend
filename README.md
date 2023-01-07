@@ -23,3 +23,9 @@ npm run start:dev
 
 ##Production
 disable the synchronize option in the TypeOrm configuration in app.module.ts 
+
+## C4 model
+![image](https://user-images.githubusercontent.com/74899257/211165182-1c8b050a-b9e1-4053-99ce-8657b490694d.png)
+![image](https://user-images.githubusercontent.com/74899257/211165185-b94de552-2385-4f72-a9a4-259e5891099b.png)
+![image](https://user-images.githubusercontent.com/74899257/211165190-68452b7c-f3c3-4bf5-913e-dbf4757c9a0b.png)
+![image](https://user-images.githubusercontent.com/74899257/211165194-ac074748-5eb2-45be-9f3e-208f643f277f.png)
