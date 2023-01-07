@@ -1,5 +1,6 @@
 # thinku-backend
-status: https://www.techiediaries.com/nestjs-upload-serve-static-file/ 
+status: 
+Image upload: https://www.techiediaries.com/nestjs-upload-serve-static-file/ 
 bij Next, add the following method mapped to the auth/:userid/avatar endpoint:
 
 testing https://youtu.be/XbSZnGCJB2I bij 14:40
