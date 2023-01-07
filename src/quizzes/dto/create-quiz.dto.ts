@@ -1,5 +1,6 @@
 import {
   ArrayMinSize,
+  ArrayMaxSize,
   IsArray,
   //   IsBoolean,
   //   IsNotEmpty,
@@ -25,5 +26,6 @@ export class CreateQuizDto {
 
   @IsArray()
   @ArrayMinSize(1)
+  @ArrayMaxSize(100)
   public questions: Question[];
 }
