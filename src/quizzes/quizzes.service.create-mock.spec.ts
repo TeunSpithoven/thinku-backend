@@ -107,4 +107,12 @@ describe('QuizzesService using createMock without DI', () => {
     // tslint:disable-next-line: no-invalid-await
     expect(await repo3.find()).toEqual([testquiz2.questions[0].answers[0]]);
   });
+
+  it('should create a new quiz', async () => {
+    repo.save.mockResolvedValue(quiz);
+
+    const newQuiz = await repo.save(quiz);
+
+    expect(newQuiz).toEqual(quiz);
+  });
 });

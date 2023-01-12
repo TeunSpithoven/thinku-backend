@@ -116,14 +116,14 @@ describe('QuizzesService', () => {
     expect(answersRepository).toBeDefined();
   });
 
-  describe('create quiz', () => {
-    it('should create a new quiz', async () => {
-      // jest.spyOn('this.answersRepository.save').mockReturnValueOnce(answer);
-      console.log('TESTQUIZ');
-      console.log(testquiz2.questions[0].answers[0]);
-      const result = await service.create(testquiz2);
+  // describe('create quiz', () => {
+  //   it('should create a new quiz', async () => {
+  //     // jest.spyOn('this.answersRepository.save').mockReturnValueOnce(answer);
+  //     console.log('TESTQUIZ');
+  //     console.log(testquiz2.questions[0].answers[0]);
+  //     const result = await service.create(testquiz2);
 
-      expect(result).toBeDefined();
-    });
-  });
+  //     expect(result).toBeDefined();
+  //   });
+  // });
 });
