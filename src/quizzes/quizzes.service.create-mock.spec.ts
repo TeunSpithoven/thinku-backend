@@ -1,7 +1,7 @@
 import { createMock } from '@golevelup/ts-jest';
 import { Test } from '@nestjs/testing';
 import { getRepositoryToken } from '@nestjs/typeorm';
-import testquiz2 from '../../test/testQuiz';
+import testquiz2 from '../../test/testquiz';
 import { Repository } from 'typeorm';
 import { Quiz } from '../quizzes/entities/quiz.entity';
 import { QuizzesService } from '../quizzes/quizzes.service';
