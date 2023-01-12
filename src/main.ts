@@ -17,11 +17,10 @@ async function bootstrap() {
     optionsSuccessStatus: 204,
     credentials: true,
   };
+  app.enableCors(options);
 
   app.use(json({ limit: '1mb' }));
   app.use(urlencoded({ extended: true, limit: '1mb' }));
-
-  app.enableCors(options);
 
   const config = new DocumentBuilder()
     .setTitle('Thinku-Backend')
