@@ -9,6 +9,10 @@ import { QuestionsService } from '../questions/questions.service';
 import { AnswersService } from '../answers/answers.service';
 import { getRepositoryToken } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
+import testquiz2 from '../../test/testquiz';
+import { ModuleMocker, MockFunctionMetadata } from 'jest-mock';
+
+const moduleMocker = new ModuleMocker(global);
 
 describe('QuizzesService', () => {
   let service: QuizzesService;
@@ -28,28 +32,67 @@ describe('QuizzesService', () => {
         AnswersService,
         {
           provide: QUIZ_REPOSITORY_TOKEN,
-          // useClass: Quiz,
           useValue: {
+            find: jest.fn().mockResolvedValue([{ quizzes: 'quizzes' }]),
+            findOneOrFail: jest.fn().mockResolvedValue({ quiz: 'quiz' }),
+            create: jest.fn().mockReturnValue(testquiz2),
             save: jest.fn(),
-            find: jest.fn(),
+            update: jest.fn().mockResolvedValue(true),
+            delete: jest.fn().mockResolvedValue(true),
           },
         },
         {
           provide: QUESTION_REPOSITORY_TOKEN,
-          // useClass: Question,
           useValue: {
+            find: jest.fn().mockResolvedValue([{ questions: 'questions' }]),
+            findOneOrFail: jest
+              .fn()
+              .mockResolvedValue({ question: 'question' }),
+            create: jest.fn().mockReturnValue(testquiz2.questions[0]),
             save: jest.fn(),
+            update: jest.fn().mockResolvedValue(true),
+            delete: jest.fn().mockResolvedValue(true),
           },
         },
         {
           provide: ANSWER_REPOSITORY_TOKEN,
-          // useClass: Answer,
           useValue: {
+            find: jest.fn().mockResolvedValue([{ mockanswers: 'mockanswers' }]),
+            findOneOrFail: jest
+              .fn()
+              .mockResolvedValue({ answer: 'mockanswer' }),
+            create: jest
+              .fn()
+              .mockReturnValue(testquiz2.questions[0].answers[0]),
             save: jest.fn(),
+            update: jest.fn().mockResolvedValue(true),
+            delete: jest.fn().mockResolvedValue(true),
           },
         },
       ],
-    }).compile();
+    })
+      .useMocker((token) => {
+        const results = testquiz2;
+        const results2 = testquiz2.questions[0];
+        const results3 = testquiz2.questions[0].answers[0];
+        if (token === QuizzesService) {
+          return { create: jest.fn().mockResolvedValue(results) };
+        }
+        if (token === QuestionsService) {
+          return { create: jest.fn().mockResolvedValue(results2) };
+        }
+        if (token === AnswersService) {
+          return { create: jest.fn().mockResolvedValue(results3) };
+        }
+        if (typeof token === 'function') {
+          const mockMetadata = moduleMocker.getMetadata(
+            token,
+          ) as MockFunctionMetadata<any, any>;
+          const Mock = moduleMocker.generateFromMetadata(mockMetadata);
+          return new Mock();
+        }
+      })
+      .compile();
 
     service = module.get<QuizzesService>(QuizzesService);
     quizzesRepository = module.get<Repository<Quiz>>(QUIZ_REPOSITORY_TOKEN);
@@ -66,42 +109,19 @@ describe('QuizzesService', () => {
   it('quizzesRepository should be defined', () => {
     expect(quizzesRepository).toBeDefined();
   });
-  it('quizzesRepository should be defined', () => {
+  it('questionsRepository should be defined', () => {
     expect(questionsRepository).toBeDefined();
   });
-  it('quizzesRepository should be defined', () => {
+  it('answersRepository should be defined', () => {
     expect(answersRepository).toBeDefined();
   });
 
   describe('create quiz', () => {
     it('should create a new quiz', async () => {
-      const quiz = {
-        userId: 3,
-        title: 'testQuiz',
-        description: 'this test is was created for a unit test',
-        image: 'imageLocation',
-        questions: [],
-      };
-      const question = {
-        id: 3,
-        quiz: quiz,
-        question: 'testQuestion',
-        type: 'open',
-        time: 3,
-        number: 3,
-        answers: [],
-      };
-      const answer = {
-        id: 3,
-        question: question,
-        answer: 'testAnswer',
-        isCorrect: true,
-      };
-      quiz.questions.push(question);
-      quiz.questions[0].answers.push(answer);
-
       // jest.spyOn('this.answersRepository.save').mockReturnValueOnce(answer);
-      const result = await service.create(quiz);
+      console.log('TESTQUIZ');
+      console.log(testquiz2.questions[0].answers[0]);
+      const result = await service.create(testquiz2);
 
       expect(result).toBeDefined();
     });

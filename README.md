@@ -4,6 +4,7 @@ Image upload: https://www.techiediaries.com/nestjs-upload-serve-static-file/
 bij Next, add the following method mapped to the auth/:userid/avatar endpoint:
 
 testing https://youtu.be/XbSZnGCJB2I bij 14:40
+nestjs test examples: https://github.com/jmcdo29/testing-nestjs/tree/main/apps/typeorm-sample
 
 backend application for the thinku quiz application providing rest and realtime functionalities
 front-end: https://github.com/TeunSpithoven/thinku-frontend
