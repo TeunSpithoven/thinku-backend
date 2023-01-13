@@ -10,6 +10,8 @@ import { QuestionsService } from '../questions/questions.service';
 import { AnswersService } from '../answers/answers.service';
 import { QuestionsModule } from '../questions/questions.module';
 import { AnswersModule } from '../answers/answers.module';
+import { GamesService } from '../games/games.service';
+import { StudentsService } from '../students/students.service';
 
 @Module({
   imports: [
@@ -18,6 +20,13 @@ import { AnswersModule } from '../answers/answers.module';
     AnswersModule,
   ],
   controllers: [QuizzesController],
-  providers: [QuizzesService, QuizSubscriber, QuestionsService, AnswersService],
+  providers: [
+    QuizzesService,
+    QuizSubscriber,
+    QuestionsService,
+    AnswersService,
+    GamesService,
+    StudentsService,
+  ],
 })
 export class QuizzesModule {}

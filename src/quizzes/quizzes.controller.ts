@@ -15,11 +15,15 @@ import { extname } from 'path';
 import { QuizzesService } from './quizzes.service';
 import { CreateQuizDto } from './dto/create-quiz.dto';
 import { UpdateQuizDto } from './dto/update-quiz.dto';
+import { GamesService } from '../games/games.service';
 
 @Controller('quizzes')
 export class QuizzesController {
   SERVER_URL = 'http://localhost:3000/';
-  constructor(private readonly quizzesService: QuizzesService) {}
+  constructor(
+    private readonly quizzesService: QuizzesService,
+    private gamesService: GamesService,
+  ) {}
 
   @Post()
   create(@Body() createQuizDto: CreateQuizDto) {
@@ -29,6 +33,15 @@ export class QuizzesController {
   @Get()
   findAll() {
     return this.quizzesService.findAll();
+  }
+
+  @Post(':id/play')
+  async play(@Param('id') id: string) {
+    const quiz = await this.quizzesService.findOne(+id);
+    if (quiz == null) {
+      return `error: no quiz with id ${id}`;
+    }
+    return this.gamesService.create(quiz);
   }
 
   @Get(':id')
