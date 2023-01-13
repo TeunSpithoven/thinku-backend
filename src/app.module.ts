@@ -12,6 +12,8 @@ import { AnswersModule } from './answers/answers.module';
 import { ImagesModule } from './images/images.module';
 import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
+import { GamesModule } from './games/games.module';
+import { StudentsModule } from './students/students.module';
 
 @Module({
   imports: [
@@ -35,6 +37,8 @@ import { AuthModule } from './auth/auth.module';
     ImagesModule,
     UsersModule,
     AuthModule,
+    GamesModule,
+    StudentsModule,
   ],
   controllers: [AppController],
 })
