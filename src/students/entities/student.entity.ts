@@ -1,7 +1,7 @@
 export class Student {
   id: number;
 
-  gameId: number;
+  gameId: string;
 
   username: string;
 

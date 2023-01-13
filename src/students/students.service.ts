@@ -37,7 +37,7 @@ export class StudentsService {
     return `student removed with id: ${id}`;
   }
 
-  removeAll(gameId: number) {
+  removeAll(gameId: string) {
     let count = 0;
     students.forEach((student) => {
       if (student.gameId === gameId) {
