@@ -14,6 +14,7 @@ import { UsersModule } from './users/users.module';
 import { AuthModule } from './auth/auth.module';
 import { GamesModule } from './games/games.module';
 import { StudentsModule } from './students/students.module';
+import { RoomModule } from './room/room.module';
 
 @Module({
   imports: [
@@ -39,6 +40,7 @@ import { StudentsModule } from './students/students.module';
     AuthModule,
     GamesModule,
     StudentsModule,
+    RoomModule,
   ],
   controllers: [AppController],
 })

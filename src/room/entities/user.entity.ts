@@ -5,7 +5,7 @@ import {
   UserName,
 } from '../../games/interfaces/chat.interface';
 
-export class Student implements UserType {
+export class User implements UserType {
   constructor(attrs: UserType) {
     Object.assign(this, attrs);
   }

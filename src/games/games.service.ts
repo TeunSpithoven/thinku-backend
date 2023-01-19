@@ -48,7 +48,6 @@ export class GamesService {
   }
 
   remove(id: string) {
-    this.studentsService.removeAll(id);
     const index = games.findIndex((game) => game.roomCode === id);
     games.splice(index, 1);
     return `game removed with id: ${id}`;

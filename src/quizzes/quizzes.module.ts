@@ -13,6 +13,7 @@ import { AnswersModule } from '../answers/answers.module';
 import { GamesService } from '../games/games.service';
 import { StudentsService } from '../students/students.service';
 import { GamesGateway } from '../games/games.gateway';
+import { RoomService } from '../room/room.service';
 
 @Module({
   imports: [
@@ -29,6 +30,8 @@ import { GamesGateway } from '../games/games.gateway';
     GamesService,
     StudentsService,
     GamesGateway,
+    RoomService,
+    StudentsService,
   ],
 })
 export class QuizzesModule {}

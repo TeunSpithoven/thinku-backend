@@ -1,51 +1,40 @@
 import { Injectable } from '@nestjs/common';
 import { Student } from './entities/student.entity';
-import { CreateStudentDto } from './dto/create-student.dto';
-import { UpdateStudentDto } from './dto/update-student.dto';
-
-const students: Student[] = [];
 
 @Injectable()
 export class StudentsService {
-  create(createStudentDto: CreateStudentDto) {
-    const newStudent = new Student();
-    newStudent.id = students.length + 1;
-    newStudent.username = createStudentDto.username;
-    newStudent.score = createStudentDto.score;
-    students.push(newStudent);
-    return newStudent;
+  private students: Student[] = [];
+
+  async addStudent(student: Student) {
+    const findStudent = await this.getStudentById(student.userId);
+    if (findStudent === 'Not Exists') {
+      const newStudent = new Student(student);
+      this.students.push(newStudent);
+    }
   }
 
-  findAll() {
-    return students;
+  async getStudentById(
+    userId: Student['userId'],
+  ): Promise<Student | 'Not Exists'> {
+    const searchForStudentIndex = await this.getStudentIndexById(userId);
+    if (searchForStudentIndex === -1) {
+      return 'Not Exists';
+    }
+    return this.students[searchForStudentIndex];
   }
 
-  findOne(id: number) {
-    return students.find((student) => student.id === id);
+  async getStudentIndexById(userId: Student['userId']): Promise<number> {
+    const searchForStudentIndex = this.students.findIndex(
+      (Student) => Student.userId === userId,
+    );
+    return searchForStudentIndex;
   }
 
-  update(id: number, updateStudentDto: UpdateStudentDto) {
-    const index = students.findIndex((student) => student.id === id);
-    students[index].username = updateStudentDto.username;
-    students[index].score = updateStudentDto.score;
-    return this.findOne(id);
-  }
-
-  remove(id: number) {
-    const index = students.findIndex((student) => student.id === id);
-    students.splice(index, 1);
-    return `student removed with id: ${id}`;
-  }
-
-  removeAll(gameId: string) {
-    let count = 0;
-    students.forEach((student) => {
-      if (student.gameId === gameId) {
-        const index = students.findIndex((student) => student === student);
-        students.splice(index, 1);
-        count++;
-      }
-    });
-    return `${count} students removed from game: ${gameId}`;
+  async removeStudentById(userId: Student['userId']): Promise<void> {
+    const findStudentIndex = await this.getStudentIndexById(userId);
+    if (findStudentIndex == -1) {
+      throw 'Student does not exist so cannot be removed from the store';
+    }
+    this.students.splice(findStudentIndex, 1);
   }
 }
